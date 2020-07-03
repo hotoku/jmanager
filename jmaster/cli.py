@@ -1,14 +1,13 @@
 """Console script for jmaster."""
 import sys
 import click
+from jmaster import jmaster
 
 
 @click.command()
 def main(args=None):
     """Console script for jmaster."""
-    click.echo("Replace this message by putting your code into "
-               "jmaster.cli.main")
-    click.echo("See click documentation at https://click.palletsprojects.com/")
+    jmaster.run()
     return 0
 
 
