@@ -18,7 +18,6 @@ class Launcher:
 
     def __del__(self):
         os.remove(_PID_FILE)
-        pass
 
     def launch(self):
         with open(_LOG, "w") as f:
