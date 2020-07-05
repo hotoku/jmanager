@@ -1,4 +1,4 @@
-Welcome to jmaster's documentation!
+Welcome to jmanager's documentation!
 ======================================
 
 .. toctree::

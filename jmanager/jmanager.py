@@ -73,7 +73,7 @@ def launch():
 def run():
     if not os.path.exists("jupyter.pid"):
         sys.stderr.write("launching new jupyter process\n")
-        sp.Popen(["jmaster", "launch"])
+        sp.Popen(["jmanager", "launch"])
     else:
         sys.stderr.write("jupyter process already run\n")
         open_browser()

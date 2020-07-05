@@ -1,4 +1,4 @@
-* jmaster version:
+* jmanager version:
 * Python version:
 * Operating System:
 

@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use jmaster in a project::
+To use jmanager in a project::
 
-    import jmaster
+    import jmanager

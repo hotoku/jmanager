@@ -1,1 +1,1 @@
-"""Unit test package for jmaster."""
+"""Unit test package for jmanager."""

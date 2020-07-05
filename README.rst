@@ -1,16 +1,16 @@
 =======
-jmaster
+jmanager
 =======
 
 
-.. image:: https://img.shields.io/pypi/v/jmaster.svg
-        :target: https://pypi.python.org/pypi/jmaster
+.. image:: https://img.shields.io/pypi/v/jmanager.svg
+        :target: https://pypi.python.org/pypi/jmanager
 
-.. image:: https://img.shields.io/travis/hotoku/jmaster.svg
-        :target: https://travis-ci.com/hotoku/jmaster
+.. image:: https://img.shields.io/travis/hotoku/jmanager.svg
+        :target: https://travis-ci.com/hotoku/jmanager
 
-.. image:: https://readthedocs.org/projects/jmaster/badge/?version=latest
-        :target: https://jmaster.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/jmanager/badge/?version=latest
+        :target: https://jmanager.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 
@@ -20,7 +20,7 @@ managing jupyter process with local pid file
 
 
 * Free software: MIT license
-* Documentation: https://jmaster.readthedocs.io.
+* Documentation: https://jmanager.readthedocs.io.
 
 
 Features

@@ -1,4 +1,4 @@
-"""Top-level package for jmaster."""
+"""Top-level package for jmanager."""
 
 __author__ = """Yasunori Horikoshi"""
 __email__ = 'horikoshi.et.al@gmail.com'

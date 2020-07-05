@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 
-"""Tests for `jmaster` package."""
+"""Tests for `jmanager` package."""
 
 
 import unittest
 from click.testing import CliRunner
 
-from jmaster import jmaster
-from jmaster import cli
+from jmanager import jmanager
+from jmanager import cli
 
 
 class TestJmaster(unittest.TestCase):
-    """Tests for `jmaster` package."""
+    """Tests for `jmanager` package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""
@@ -27,7 +27,7 @@ class TestJmaster(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        assert 'jmaster.cli.main' in result.output
+        assert 'jmanager.cli.main' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
