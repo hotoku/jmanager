@@ -71,7 +71,7 @@ def launch():
 
 @main.command()
 def run():
-    if not os.path.exists("jupyter.pid"):
+    if not os.path.exists(_PID_FILE):
         sys.stderr.write("launching new jupyter process\n")
         sp.Popen(["jmanager", "launch"])
     else:
