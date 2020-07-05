@@ -2,5 +2,9 @@
 from jmaster import jmaster
 
 
+def main():
+    jmaster.main()
+
+
 if __name__ == "__main__":
-    print(1)
+    main()

@@ -18,6 +18,7 @@ class Launcher:
 
     def __del__(self):
         os.remove(_PID_FILE)
+        pass
 
     def launch(self):
         with open(_LOG, "w") as f:
@@ -38,21 +39,22 @@ class Launcher:
                 token=token
             )
             json.dump(dat, f)
+        po.wait()
 
 
 @click.group(invoke_without_command=True)
 @click.pass_context
 def main(ctx):
-    if ctx.invoked_subocmmand is None:
+    if ctx.invoked_subcommand is None:
         run()
 
 
 @main.command()
 def kill():
-    if os.exists(_PID_FILE):
+    if os.path.exists(_PID_FILE):
         with open(_PID_FILE) as f:
             pid = json.load(f)
-        sp.Popen(["kill", "-9", pid["pid"]])
+        sp.Popen(["kill", "-9", str(pid["pid"])])
 
 
 def open_browser():
@@ -62,11 +64,16 @@ def open_browser():
 
 
 @main.command()
+def launch():
+    launcher = Launcher()
+    launcher.launch()
+
+
+@main.command()
 def run():
     if not os.path.exists("jupyter.pid"):
         sys.stderr.write("launching new jupyter process\n")
-        launcher = Launcher()
-        launcher.launc()
+        sp.Popen(["jmaster", "launch"])
     else:
         sys.stderr.write("jupyter process already run\n")
         open_browser()
