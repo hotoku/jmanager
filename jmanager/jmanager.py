@@ -79,3 +79,9 @@ def run():
     else:
         sys.stderr.write("jupyter process already run\n")
         open_browser()
+
+
+@main.command()
+def ignore():
+    print(_PID_FILE)
+    print(_LOG)
