@@ -59,7 +59,10 @@ def kill():
 def open_browser():
     with open(_PID_FILE) as f:
         dat = json.load(f)
-    sp.Popen(["open", f"http://localhost:{dat['port']}/?token={dat['token']}"])
+    url = f"http://localhost:{dat['port']}/?token={dat['token']}"
+    sys.stderr.write(json.dumps(dat) + "\n")
+    sys.stderr.write(url + "\n")
+    sp.Popen(["open", url])
 
 
 @main.command()
