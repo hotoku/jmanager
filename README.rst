@@ -27,7 +27,7 @@ Features
 --------
 
 * TODO
-  * write document
+  - write document
 
 Credits
 -------
