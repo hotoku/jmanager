@@ -12,9 +12,9 @@ with open('HISTORY.rst') as history_file:
 
 requirements = ['Click>=7.0', ]
 
-setup_requirements = [ ]
+setup_requirements = []
 
-test_requirements = [ ]
+test_requirements = []
 
 setup(
     author="Yasunori Horikoshi",
@@ -31,7 +31,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
     ],
-    description="Python Boilerplate contains all the boilerplate you need to create a Python package.",
+    description="managing jupyter process with local pid file",
     entry_points={
         'console_scripts': [
             'jmanager=jmanager.cli:main',
