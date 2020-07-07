@@ -105,3 +105,4 @@ ENV/
 .vscode/
 jupyter.pid
 jupyter.log
+.markdown-preview.html

@@ -86,3 +86,6 @@ install: clean ## install the package to the active Python's site-packages
 
 install-develop: clean ## install the package to the active Python's site-packages in develop mode
 	python setup.py develop
+
+pypi-test: dist
+	python setup.py register -r https://test.pypi.org/legacy
