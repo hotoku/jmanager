@@ -48,7 +48,7 @@ def main(ctx):
         run()
 
 
-@main.command()
+@main.command(help="Terminate jupyter process")
 def kill():
     if os.path.exists(_PID_FILE):
         with open(_PID_FILE) as f:
@@ -65,13 +65,13 @@ def open_browser():
     sp.Popen(["open", url])
 
 
-@main.command()
+@main.command(hidden=True)
 def launch():
     launcher = Launcher()
     launcher.launch()
 
 
-@main.command()
+@main.command(help="Launch new jupyter or connect to existing one.")
 def run():
     if not os.path.exists(_PID_FILE):
         sys.stderr.write("launching new jupyter process\n")
@@ -81,7 +81,7 @@ def run():
         open_browser()
 
 
-@main.command()
+@main.command(help="Print lines for .gitignore")
 def ignore():
     print(_PID_FILE)
     print(_LOG)
