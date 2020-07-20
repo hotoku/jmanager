@@ -7,9 +7,21 @@ import re
 import json
 import sys
 import click
+import signal
 
 _PID_FILE = "jupyter.pid"
-_LOG = "jupyter.log"
+_JUPYTER_LOG = "jupyter.log"
+_JMANAGER_LOG = "jmanager.log"
+
+
+def receiveSignal(signalNumber, frame):
+    if not os.path.isfile(_PID_FILE):
+        return
+    with open(_PID_FILE) as f:
+        pid = json.load(f)
+    with open(_JMANAGER_LOG) as f:
+        f.write(f"receiving signal {signalNumber}. removing {_PID_FILE}. it's contents was {json.dumps(pid)}")
+    os.remove(_PID_FILE)
 
 
 class Launcher:
@@ -20,13 +32,13 @@ class Launcher:
         os.remove(_PID_FILE)
 
     def launch(self):
-        with open(_LOG, "w") as f:
+        with open(_JUPYTER_LOG, "w") as f:
             po = sp.Popen(["jupyter", "lab"],
                           stdout=f,
                           stderr=sp.STDOUT,
                           text=True)
         sleep(5)
-        with open(_LOG) as f:
+        with open(_JUPYTER_LOG) as f:
             for l in f:
                 r = re.match(r"^ +http://localhost:([0-9]+)/\?token=([0-9a-z]+)$", l)
                 if r:
@@ -38,6 +50,7 @@ class Launcher:
                 token=token
             )
             json.dump(dat, f)
+        signal.signal(signal.SIGTERM, receiveSignal)
         po.wait()
 
 
@@ -84,4 +97,5 @@ def run():
 @main.command(help="Print lines for .gitignore")
 def ignore():
     print(_PID_FILE)
-    print(_LOG)
+    print(_JUPYTER_LOG)
+    print(_JMANAGER_LOG)
