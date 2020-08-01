@@ -88,4 +88,7 @@ install-develop: clean ## install the package to the active Python's site-packag
 	python setup.py develop
 
 pypi-test: dist
-	python setup.py register -r https://test.pypi.org/legacy
+	python -m twine upload --repository testpypi dist/*
+
+pypi: dist
+	python -m twine upload dist/*
