@@ -24,6 +24,10 @@ def receiveSignal(signalNumber, frame):
     os.remove(_PID_FILE)
 
 
+class TooManyTrial(Exception):
+    pass
+
+
 class Launcher:
     def __init__(self):
         pass
@@ -37,12 +41,22 @@ class Launcher:
                           stdout=f,
                           stderr=sp.STDOUT,
                           text=True)
-        sleep(5)
-        with open(_JUPYTER_LOG) as f:
-            for l in f:
-                r = re.match(r"^\s+http://localhost:([0-9]+)/\?token=([0-9a-z]+)$", l)
-                if r:
-                    port, token = r.expand(r"\1"), r.expand(r"\2")
+        n_try = 0
+        port, token = None, None
+        while True:
+            if n_try >= 100:
+                raise TooManyTrial()
+            with open(_JUPYTER_LOG) as f:
+                for l in f:
+                    r = re.match(r"^\s+http://localhost:([0-9]+)/\?token=([0-9a-z]+)$", l)
+                    if r:
+                        port, token = r.expand(r"\1"), r.expand(r"\2")
+                        break
+            if port is not None:
+                break
+            else:
+                n_try += 1
+                sleep(1)
         with open(_PID_FILE, "w") as f:
             dat = dict(
                 pid=po.pid,
