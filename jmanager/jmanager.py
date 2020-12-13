@@ -40,7 +40,7 @@ class Launcher:
         sleep(5)
         with open(_JUPYTER_LOG) as f:
             for l in f:
-                r = re.match(r"^ +http://localhost:([0-9]+)/\?token=([0-9a-z]+)$", l)
+                r = re.match(r"^\s+http://localhost:([0-9]+)/\?token=([0-9a-z]+)$", l)
                 if r:
                     port, token = r.expand(r"\1"), r.expand(r"\2")
         with open(_PID_FILE, "w") as f:
