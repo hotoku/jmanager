@@ -20,7 +20,8 @@ def receiveSignal(signalNumber, frame):
     with open(_PID_FILE) as f:
         pid = json.load(f)
     with open(_JMANAGER_LOG) as f:
-        f.write(f"receiving signal {signalNumber}. removing {_PID_FILE}. it's contents was {json.dumps(pid)}")
+        f.write(
+            f"receiving signal {signalNumber}. removing {_PID_FILE}. it's contents was {json.dumps(pid)}")
     os.remove(_PID_FILE)
 
 
@@ -48,7 +49,8 @@ class Launcher:
                 raise TooManyTrial()
             with open(_JUPYTER_LOG) as f:
                 for l in f:
-                    r = re.match(r"^\s+http://localhost:([0-9]+)/\?token=([0-9a-z]+)$", l)
+                    r = re.match(
+                        r"^\s+http://localhost:([0-9]+)/lab\?token=([0-9a-z]+)$", l)
                     if r:
                         port, token = r.expand(r"\1"), r.expand(r"\2")
                         break
