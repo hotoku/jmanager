@@ -101,7 +101,8 @@ def launch():
 
 
 @main.command(help="Launch new jupyter or connect to existing one.")
-def run():
+@click.option("--internet/--nointernet", "-i", default=False, type=bool)
+def run(internet):
     if not os.path.exists(_PID_FILE):
         sys.stderr.write("launching new jupyter process\n")
         sp.Popen(["jmanager", "launch"])
