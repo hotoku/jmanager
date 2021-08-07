@@ -36,9 +36,12 @@ class Launcher:
     def __del__(self):
         os.remove(_PID_FILE)
 
-    def launch(self):
+    def launch(self, internet):
+        cmd = ["jupyter", "lab"]
+        if internet:
+            cmd.append('--ip=*')
         with open(_JUPYTER_LOG, "w") as f:
-            po = sp.Popen(["jupyter", "lab"],
+            po = sp.Popen(cmd,
                           stdout=f,
                           stderr=sp.STDOUT,
                           text=True)
@@ -50,7 +53,7 @@ class Launcher:
             with open(_JUPYTER_LOG) as f:
                 for l in f:
                     r = re.match(
-                        r"^\s+http://localhost:([0-9]+)/lab\?token=([0-9a-z]+)$", l)
+                        r"^\s+http://.+:([0-9]+)/lab\?token=([0-9a-z]+)$", l)
                     if r:
                         port, token = r.expand(r"\1"), r.expand(r"\2")
                         break
@@ -95,17 +98,22 @@ def open_browser():
 
 
 @main.command(hidden=True)
-def launch():
+@click.option("--internet/--nointernet", "-i", default=False, type=bool)
+def launch(internet):
     launcher = Launcher()
-    launcher.launch()
+    launcher.launch(internet)
 
 
 @main.command(help="Launch new jupyter or connect to existing one.")
 @click.option("--internet/--nointernet", "-i", default=False, type=bool)
 def run(internet):
+    if internet:
+        opts = "--internet"
+    else:
+        opts = "--nointernet"
     if not os.path.exists(_PID_FILE):
         sys.stderr.write("launching new jupyter process\n")
-        sp.Popen(["jmanager", "launch"])
+        sp.Popen(["jmanager", "launch", opts])
     else:
         sys.stderr.write("jupyter process already run\n")
         open_browser()
