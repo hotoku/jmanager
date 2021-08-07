@@ -2,8 +2,14 @@
 name = "jmanager"
 version = "1.3.0"
 description = "A lightweight Jupyter process manager"
-authors = ["Yasunori Horikoshi <hotoku@users.noreply.github.com>"]
+authors = ["Yasunori Horikoshi <horikoshi.et.al@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/hotoku/jmanager"
+repository = "https://github.com/hotoku/jmanager"
+include = [
+        "LICENSE"
+]
 
 [tool.poetry.dependencies]
 python = ">=3.6.2,<4"
