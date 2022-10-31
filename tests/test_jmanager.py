@@ -10,7 +10,7 @@ import tempfile
 from jmanager import jmanager
 
 
-class TestJmaster(unittest.TestCase):
+class TestJmanager(unittest.TestCase):
     """Tests for `jmanager` package."""
 
     def setUp(self):
@@ -20,7 +20,10 @@ class TestJmaster(unittest.TestCase):
         """Tear down test fixtures, if any."""
 
     def test_command_line_interface(self):
-        """Test the CLI."""
+        """Test the CLI.
+
+        A sample of testing cli by click.
+        """
         runner = CliRunner()
         help_result = runner.invoke(jmanager.main, ['--help'])
         assert help_result.exit_code == 0
