@@ -4,8 +4,10 @@
 
 
 import unittest
-from click.testing import CliRunner
 import tempfile
+import os
+
+from click.testing import CliRunner
 
 from jmanager import jmanager
 
@@ -32,5 +34,13 @@ class TestJmanager(unittest.TestCase):
     def test_find_pid_file(self):
         """Test find_pid_file."""
         with tempfile.TemporaryDirectory() as td:
-            print(td)
-        
+            ret = jmanager.find_pid_file(td)
+            assert ret is None
+            open(os.path.join(td, jmanager._PID_FILE), "w").close()
+            ret2 = jmanager.find_pid_file(td)
+            assert ret2 == td
+            path = os.path.join(td, "a/b/c/d/e/f")
+            os.makedirs(path)
+            ret3 = jmanager.find_pid_file(path)
+            assert ret3 is not None
+            assert ret3 == td

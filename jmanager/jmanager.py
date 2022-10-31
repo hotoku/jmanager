@@ -104,15 +104,17 @@ def launch(internet):
     launcher = Launcher()
     launcher.launch(internet)
 
+
 def find_pid_file(dir_path):
-    path = os.path.join(dir_path, _PID_FILE)    
+    path = os.path.join(dir_path, _PID_FILE)
     if os.path.exists(path):
         return dir_path
     current = pathlib.Path(dir_path)
-    if current == pathlib.Path("/"): # current cwd is root
+    if current == pathlib.Path("/"):  # current cwd is root
         return None
     else:
-        return find_pid_file(current.parent)
+        return find_pid_file(str(current.parent))
+
 
 @main.command(help="Launch new jupyter or connect to existing one.")
 @click.option("--internet/--nointernet", "-i", default=False, type=bool)
