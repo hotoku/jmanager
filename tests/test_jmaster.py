@@ -5,9 +5,9 @@
 
 import unittest
 from click.testing import CliRunner
+import tempfile
 
 from jmanager import jmanager
-from jmanager import cli
 
 
 class TestJmaster(unittest.TestCase):
@@ -19,15 +19,15 @@ class TestJmaster(unittest.TestCase):
     def tearDown(self):
         """Tear down test fixtures, if any."""
 
-    def test_000_something(self):
-        """Test something."""
-
     def test_command_line_interface(self):
         """Test the CLI."""
         runner = CliRunner()
-        result = runner.invoke(cli.main)
-        assert result.exit_code == 0
-        assert 'jmanager.cli.main' in result.output
-        help_result = runner.invoke(cli.main, ['--help'])
+        help_result = runner.invoke(jmanager.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
+
+    def test_find_pid_file(self):
+        """Test find_pid_file."""
+        with tempfile.TemporaryDirectory() as td:
+            print(td)
+        

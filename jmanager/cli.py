@@ -1,5 +1,5 @@
 """Console script for jmanager."""
-from jmanager import jmanager
+from . import jmanager
 
 
 def main():
