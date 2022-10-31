@@ -83,8 +83,9 @@ def main(ctx):
 
 @main.command(help="Terminate jupyter process")
 def kill():
-    if os.path.exists(_PID_FILE):
-        with open(_PID_FILE) as f:
+    work_dir = find_pid_file(os.getcwd())
+    if work_dir is not None:
+        with open(os.path.join(work_dir, _PID_FILE)) as f:
             pid = json.load(f)
         sp.Popen(["kill", "-9", str(pid["pid"])])
 
