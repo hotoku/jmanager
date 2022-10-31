@@ -105,7 +105,7 @@ def launch(internet):
     launcher.launch(internet)
 
 
-def find_pid_file(dir_path):
+def find_pid_file(dir_path: str) -> str | None:
     path = os.path.join(dir_path, _PID_FILE)
     if os.path.exists(path):
         return dir_path
@@ -123,11 +123,13 @@ def run(internet):
         opts = "--internet"
     else:
         opts = "--nointernet"
-    if not os.path.exists(_PID_FILE):
+    work_dir = find_pid_file(os.getcwd())
+    if work_dir is None:
         sys.stderr.write("launching new jupyter process\n")
         sp.Popen(["jmanager", "launch", opts])
     else:
         sys.stderr.write("jupyter process already run\n")
+        os.chdir(work_dir)
         open_browser()
 
 
