@@ -16,7 +16,7 @@ build:
 
 .PHONY: publish
 publish: build
-	poetry publish -u hotoku -p $(myps -P 158)
+	poetry publish -u hotoku -p $(shell myps -P 158)
 
 
 .PHONY: test
