@@ -1,4 +1,5 @@
-PYPI_TOKEN := "" # 環境変数として設定すること
+# 必要な環境変数:
+# PYPI_TOKEN https://pypi.org/manage/account/token/で作る
 
 
 define release
